@@ -717,6 +717,15 @@ a:hover { color: var(--ink-on-deep); }
 .band--deep .aside-note { border-top-color: var(--copper); }
 .aside-note h2,
 .aside-note h3 { font-size: var(--step-1); margin-bottom: 0.6rem; }
+
+/* Standalone links in an aside are targets, not running text. */
+.aside-note a[href^="mailto"],
+.aside-note a[href^="tel"] {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 700;
+}
 .aside-note p { color: var(--muted-on-pale); }
 .band--deep .aside-note p { color: var(--muted-on-deep); }
 
