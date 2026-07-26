@@ -340,7 +340,7 @@ a:hover { color: var(--ink-on-deep); }
 .header-line__row {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: 1rem clamp(1.5rem, 1rem + 2vw, 3rem);
   padding-bottom: clamp(1.1rem, 0.95rem + 0.7vw, 1.6rem);
@@ -357,22 +357,23 @@ a:hover { color: var(--ink-on-deep); }
 
 .header-line .btn { padding: 0.6rem 1rem; font-size: var(--step--1); }
 
-/* Specification row ----------------------------------------------------- */
+/* Specification row.
+   Column counts are set in mutually exclusive ranges so no nth-child rule
+   from one breakpoint can leak into another by specificity. The first cell
+   in every row is flush with the page margin; every other cell is inset so
+   its text never sits against a divider. */
 
 .spec {
   margin: 0;
   border-top: 1px solid var(--rule-strong);
   border-bottom: 1px solid var(--rule-strong);
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
 }
 .spec > div {
-  padding: 0.85rem 1.15rem 0.9rem 0;
+  padding-block: 0.85rem 0.9rem;
   border-right: 1px solid var(--rule-on-deep);
   min-width: 0;
 }
-.spec > div:last-child { border-right: 0; padding-right: 0; }
-
 .spec dt {
   font-size: var(--step--1);
   font-weight: 600;
@@ -387,15 +388,40 @@ a:hover { color: var(--ink-on-deep); }
   text-wrap: pretty;
 }
 
-@media (max-width: 44rem) {
-  .spec { grid-template-columns: 1fr 1fr; }
-  .spec > div { padding: 0.75rem 0.9rem 0.8rem 0; border-bottom: 1px solid var(--rule-on-deep); }
-  .spec > div:nth-child(2n) { border-right: 0; padding-right: 0; }
-  .spec > div:last-child { border-bottom: 0; }
+/* 5 across */
+@media (min-width: 68.001rem) {
+  .spec { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .spec > div { padding-inline: 1.4rem; }
+  .spec > div:nth-child(5n + 1) { padding-left: 0; }
+  .spec > div:nth-child(5n) { border-right: 0; padding-right: 0; }
+  .spec > div:last-child { border-right: 0; padding-right: 0; }
 }
+
+/* 3 across */
+@media (min-width: 44.001rem) and (max-width: 68rem) {
+  .spec { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .spec > div { padding-inline: 1.4rem; border-bottom: 1px solid var(--rule-on-deep); }
+  .spec > div:nth-child(3n + 1) { padding-left: 0; }
+  .spec > div:nth-child(3n) { border-right: 0; padding-right: 0; }
+  .spec > div:nth-last-child(-n + 2) { border-bottom: 0; }
+  .spec > div:last-child { border-right: 0; padding-right: 0; }
+}
+
+/* 2 across */
+@media (min-width: 21.001rem) and (max-width: 44rem) {
+  .spec { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .spec > div { padding-inline: 1.1rem; border-bottom: 1px solid var(--rule-on-deep); }
+  .spec > div:nth-child(2n + 1) { padding-left: 0; }
+  .spec > div:nth-child(2n) { border-right: 0; padding-right: 0; }
+  .spec > div:last-child { border-right: 0; border-bottom: 0; padding-right: 0; }
+  .spec > div:nth-last-child(2):nth-child(odd) { border-bottom: 0; }
+}
+
+/* stacked */
 @media (max-width: 21rem) {
   .spec { grid-template-columns: 1fr; }
-  .spec > div { border-right: 0; padding-right: 0; }
+  .spec > div { padding-inline: 0; border-right: 0; border-bottom: 1px solid var(--rule-on-deep); }
+  .spec > div:last-child { border-bottom: 0; }
 }
 
 /* Plate. A wide letterbox of real work, doing the job of establishing the
