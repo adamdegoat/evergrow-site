@@ -6,16 +6,22 @@ Static site. No framework, no build step. Open `index.html` or serve the folder.
 python3 -m http.server 8917   # then http://localhost:8917
 ```
 
-## Pages
+## One page
 
-| File | Audience |
+The whole site is `index.html`, plus `404.html` for stray links. Five separate
+pages were collapsed into one after the content turned out to be thinner than the
+structure. Sections carry ids and the nav is anchors:
+
+| Anchor | Section |
 |---|---|
-| `index.html` | Everyone. Capability schedule, audience router, LEW, works log |
-| `subcontract.html` | Main contractors, ID firms, M&E coordinators |
-| `commercial.html` | Businesses, landlords, facility managers |
-| `residential.html` | Homeowners |
-| `contact.html` | All |
-| `404.html` | Bad or stale links. Uses absolute `/evergrow-site/` paths |
+| `#capability` | The capability schedule |
+| `#trade` | Main contractors and ID firms |
+| `#business` | Businesses and building owners |
+| `#homes` | Homeowners |
+| `#contact` | Contact |
+
+The old `subcontract.html`, `commercial.html`, `residential.html` and
+`contact.html` are in git history at commit `dc57ef6` if they are ever wanted back.
 
 `css/site.css` holds the whole design system. `js/site.js` runs the EN / 中文 toggle
 and the mobile action dock. `sitemap.xml`, `robots.txt` and the `LocalBusiness`
@@ -48,17 +54,17 @@ rather than filled with plausible guesses.
 - [ ] **Logo.** Currently a text wordmark in `.wordmark`. Swap the text for an image; the slot is sized for it.
 - [ ] **Real job photos.** Two stock images are in use (`index.html`, opening and continuity blocks). Replace with Evergrow's own as soon as they arrive.
 - [ ] **Works log** (`index.html`). Five to ten real jobs, one line each: type of work, building type, area.
-- [ ] **bizSAFE level and BCA CRS registration and grade** (`subcontract.html`). Main contractors screen on both.
-- [ ] **Office address, business hours, out of hours availability, registered company name and UEN** (`contact.html`).
+- [ ] **bizSAFE level and BCA CRS registration and grade** (the `#trade` section). Main contractors screen on both.
+- [ ] **Office address, business hours, out of hours availability, registered company name and UEN.**
 - [ ] **Chinese company name**, if the firm has a registered one. The 中文 pages currently use "Evergrow Electrical Service" as-is.
 - [ ] **A price signal for homeowners.** The residential page promises "a realistic range" but the site never gives one. Cost is the first thing a homeowner screens on, and its absence is the largest remaining gap on the direct-consumer side. A callout fee, or a from-price on two or three common jobs, would close it.
 - [ ] **Address and business hours in the structured data.** `index.html`'s JSON-LD deliberately omits `address`, `openingHours` and `priceRange`. Local search ranking wants all three.
-- [ ] **Licensing wording review** (`commercial.html`). The LEW and installation licence copy describes Singapore's regime in general terms. Read it once and correct anything that does not match how the firm actually operates.
+- [ ] **Licensing wording review** (the `#business` and LEW sections). The LEW and installation licence copy describes Singapore's regime in general terms. Read it once and correct anything that does not match how the firm actually operates.
 
 ## Before going public
 
 `<meta name="robots" content="noindex, nofollow">` sits in every page, flagged with a
-comment. Remove that line from all five pages once the placeholders are filled. If a
+comment. Remove that line from `index.html` once the placeholders are filled. If a
 custom domain is added at the apex, also change `/evergrow-site/` to `/` in `404.html`
 and update the URLs in `sitemap.xml`, `robots.txt` and the JSON-LD.
 
