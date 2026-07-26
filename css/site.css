@@ -393,7 +393,7 @@ a:hover { color: var(--ink-on-deep); }
   .spec > div:nth-child(2n) { border-right: 0; padding-right: 0; }
   .spec > div:last-child { border-bottom: 0; }
 }
-@media (max-width: 26rem) {
+@media (max-width: 21rem) {
   .spec { grid-template-columns: 1fr; }
   .spec > div { border-right: 0; padding-right: 0; }
 }
