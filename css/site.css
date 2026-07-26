@@ -49,7 +49,7 @@
   /* Space --------------------------------------------------------------- */
   --gutter: clamp(1.25rem, 0.9rem + 1.7vw, 3rem);
   --measure: 68ch;
-  --section-y: clamp(2.75rem, 2.1rem + 3.2vw, 5rem);
+  --section-y: clamp(2.5rem, 2rem + 2.4vw, 4rem);
 
   /* Depth --------------------------------------------------------------- */
   --z-base: 1;
@@ -331,64 +331,43 @@ a:hover { color: var(--ink-on-deep); }
    Opening block
    ========================================================================== */
 
-/* Title block.
-   Modelled on the title block on a contractor's drawing: identity and the
-   governing facts arrive together, in one dense unit. Deliberately not a hero:
-   no oversized sentence, no image beside it, nothing withheld below the fold. */
+/* Header line.
+   A single line of identity and the governing facts, then the schedule.
+   Not a hero: no oversized sentence, no image, nothing held back. */
 
-.titleblock { padding-block: clamp(1.75rem, 1.4rem + 1.6vw, 2.75rem) 0; }
+.header-line { padding-block: clamp(1.25rem, 1.05rem + 0.9vw, 1.9rem) 0; }
 
-.titleblock__top {
-  display: grid;
-  gap: clamp(1.5rem, 1.1rem + 1.6vw, 2.5rem);
-  align-items: end;
-  padding-bottom: clamp(1.5rem, 1.2rem + 1.4vw, 2.25rem);
-}
-/* Explicit placement: trade line and actions stack on the left, the thing that
-   actually differentiates the firm sits alone on the right. Asymmetric on
-   purpose, and locked so auto-placement cannot rearrange it. */
-@media (min-width: 58rem) {
-  .titleblock__top {
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-    align-items: start;
-    column-gap: clamp(2rem, 1rem + 3vw, 4rem);
-  }
-  .titleblock h1        { grid-column: 1; grid-row: 1; }
-  .titleblock__edge     { grid-column: 2; grid-row: 1; margin-top: 0.35rem; }
-  .titleblock .btn-row  { grid-column: 1; grid-row: 2; margin-top: 1.9rem; }
+.header-line__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem clamp(1.5rem, 1rem + 2vw, 3rem);
+  padding-bottom: clamp(1.1rem, 0.95rem + 0.7vw, 1.6rem);
 }
 
-/* The masthead already carries the name. This states the trade, once, at
-   document-title size rather than headline size. */
-.titleblock__edge {
-  margin-top: 0.85rem;
-  font-size: var(--step-1);
-  line-height: 1.4;
-  color: var(--copper-bright);
-  font-weight: 600;
-  max-width: 34ch;
-}
-
-.titleblock__desc {
-  font-size: clamp(1.55rem, 1.25rem + 1.5vw, 2.4rem);
+.header-line h1 {
+  font-size: clamp(1.3rem, 1.16rem + 0.65vw, 1.85rem);
   font-weight: 800;
-  font-stretch: 112%;
-  letter-spacing: -0.025em;
-  line-height: 1.12;
-  max-width: 24ch;
+  font-stretch: 110%;
+  letter-spacing: -0.022em;
+  line-height: 1.2;
+  max-width: 30ch;
 }
 
-/* Specification grid ---------------------------------------------------- */
+.header-line .btn { padding: 0.6rem 1rem; font-size: var(--step--1); }
+
+/* Specification row ----------------------------------------------------- */
 
 .spec {
   margin: 0;
   border-top: 1px solid var(--rule-strong);
   border-bottom: 1px solid var(--rule-strong);
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10.5rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
 }
 .spec > div {
-  padding: 1.1rem 1.25rem 1.15rem 0;
+  padding: 0.85rem 1.15rem 0.9rem 0;
   border-right: 1px solid var(--rule-on-deep);
   min-width: 0;
 }
@@ -398,22 +377,21 @@ a:hover { color: var(--ink-on-deep); }
   font-size: var(--step--1);
   font-weight: 600;
   color: var(--muted-on-deep);
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.25rem;
 }
 .spec dd {
   margin: 0;
   font-size: var(--step-0);
   font-weight: 700;
-  line-height: 1.3;
+  line-height: 1.28;
   text-wrap: pretty;
 }
-.spec dd em { font-style: normal; color: var(--copper-bright); }
 
 @media (max-width: 44rem) {
   .spec { grid-template-columns: 1fr 1fr; }
-  .spec > div { padding: 0.9rem 1rem 0.95rem 0; border-bottom: 1px solid var(--rule-on-deep); }
+  .spec > div { padding: 0.75rem 0.9rem 0.8rem 0; border-bottom: 1px solid var(--rule-on-deep); }
   .spec > div:nth-child(2n) { border-right: 0; padding-right: 0; }
-  .spec > div:nth-last-child(-n+1) { border-bottom: 0; }
+  .spec > div:last-child { border-bottom: 0; }
 }
 @media (max-width: 26rem) {
   .spec { grid-template-columns: 1fr; }
