@@ -350,6 +350,15 @@ a:hover { color: var(--ink-on-deep); }
 
 /* The masthead already carries the name. This states the trade, once, at
    document-title size rather than headline size. */
+.titleblock__edge {
+  margin-top: 0.85rem;
+  font-size: var(--step-1);
+  line-height: 1.4;
+  color: var(--copper-bright);
+  font-weight: 600;
+  max-width: 34ch;
+}
+
 .titleblock__desc {
   font-size: clamp(1.55rem, 1.25rem + 1.5vw, 2.4rem);
   font-weight: 800;
