@@ -15,8 +15,14 @@ python3 -m http.server 8917   # then http://localhost:8917
 | `commercial.html` | Businesses, landlords, facility managers |
 | `residential.html` | Homeowners |
 | `contact.html` | All |
+| `404.html` | Bad or stale links. Uses absolute `/evergrow-site/` paths |
 
-`css/site.css` holds the whole design system. `js/i18n.js` runs the EN / 中文 toggle.
+`css/site.css` holds the whole design system. `js/site.js` runs the EN / 中文 toggle
+and the mobile action dock. `sitemap.xml`, `robots.txt` and the `LocalBusiness`
+JSON-LD in `index.html` handle discovery.
+
+The dock is the sticky WhatsApp / Call bar on phones. It appears only when no
+in-page contact link is on screen, so it never sits under a button already visible.
 
 ## Language
 
@@ -45,7 +51,16 @@ rather than filled with plausible guesses.
 - [ ] **bizSAFE level and BCA CRS registration and grade** (`subcontract.html`). Main contractors screen on both.
 - [ ] **Office address, business hours, out of hours availability, registered company name and UEN** (`contact.html`).
 - [ ] **Chinese company name**, if the firm has a registered one. The 中文 pages currently use "Evergrow Electrical Service" as-is.
+- [ ] **A price signal for homeowners.** The residential page promises "a realistic range" but the site never gives one. Cost is the first thing a homeowner screens on, and its absence is the largest remaining gap on the direct-consumer side. A callout fee, or a from-price on two or three common jobs, would close it.
+- [ ] **Address and business hours in the structured data.** `index.html`'s JSON-LD deliberately omits `address`, `openingHours` and `priceRange`. Local search ranking wants all three.
 - [ ] **Licensing wording review** (`commercial.html`). The LEW and installation licence copy describes Singapore's regime in general terms. Read it once and correct anything that does not match how the firm actually operates.
+
+## Before going public
+
+`<meta name="robots" content="noindex, nofollow">` sits in every page, flagged with a
+comment. Remove that line from all five pages once the placeholders are filled. If a
+custom domain is added at the apex, also change `/evergrow-site/` to `/` in `404.html`
+and update the URLs in `sitemap.xml`, `robots.txt` and the JSON-LD.
 
 ## Deliberately left out
 
