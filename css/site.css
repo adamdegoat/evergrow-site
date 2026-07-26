@@ -49,7 +49,7 @@
   /* Space --------------------------------------------------------------- */
   --gutter: clamp(1.25rem, 0.9rem + 1.7vw, 3rem);
   --measure: 68ch;
-  --section-y: clamp(3.5rem, 2.4rem + 5.4vw, 7.5rem);
+  --section-y: clamp(2.75rem, 2.1rem + 3.2vw, 5rem);
 
   /* Depth --------------------------------------------------------------- */
   --z-base: 1;
@@ -99,6 +99,11 @@ h1, h2, h3, h4 {
   font-stretch: 118%;
   text-wrap: balance;
 }
+
+/* One scale for the whole site. h1 is document-title size, not headline size,
+   so nothing on the page shouts louder than the information. */
+h2 { font-size: var(--step-2); line-height: 1.1; }
+h3 { font-size: var(--step-1); line-height: 1.2; }
 
 html[lang="zh"] h1,
 html[lang="zh"] h2,
@@ -161,7 +166,7 @@ a:hover { color: var(--ink-on-deep); }
   margin-bottom: clamp(1.75rem, 1.35rem + 1.5vw, 2.5rem);
   max-width: 52ch;
 }
-.band-head h2 { font-size: var(--step-3); }
+.band-head h2 { font-size: var(--step-2); }
 .band-head p {
   font-size: var(--step-1);
   line-height: 1.45;
@@ -321,90 +326,92 @@ a:hover { color: var(--ink-on-deep); }
    Opening block
    ========================================================================== */
 
-.opening { padding-block: clamp(2rem, 1.5rem + 2.2vw, 3.5rem) 0; }
+/* Title block.
+   Modelled on the title block on a contractor's drawing: identity and the
+   governing facts arrive together, in one dense unit. Deliberately not a hero:
+   no oversized sentence, no image beside it, nothing withheld below the fold. */
 
-.opening__grid {
+.titleblock { padding-block: clamp(1.75rem, 1.4rem + 1.6vw, 2.75rem) 0; }
+
+.titleblock__top {
   display: grid;
-  gap: clamp(2rem, 1rem + 3.4vw, 3.5rem);
-  align-items: center;
+  gap: clamp(1.5rem, 1.1rem + 1.6vw, 2.5rem);
+  align-items: end;
+  padding-bottom: clamp(1.5rem, 1.2rem + 1.4vw, 2.25rem);
 }
-@media (min-width: 62rem) {
-  .opening__grid { grid-template-columns: minmax(0, 1.28fr) minmax(0, 0.72fr); }
-}
-
-.opening h1 {
-  font-size: var(--step-5);
-  font-weight: 900;
-  font-stretch: 122%;
-  letter-spacing: -0.038em;
-}
-.opening h1 .since {
-  display: block;
-  color: var(--copper-bright);
-  font-stretch: 122%;
+@media (min-width: 58rem) {
+  .titleblock__top { grid-template-columns: minmax(0, 1fr) auto; }
 }
 
-.opening__sub {
-  margin-top: 1.35rem;
-  font-size: var(--step-1);
-  line-height: 1.45;
-  color: var(--muted-on-deep);
-  max-width: 44ch;
+/* The masthead already carries the name. This states the trade, once, at
+   document-title size rather than headline size. */
+.titleblock__desc {
+  font-size: clamp(1.55rem, 1.25rem + 1.5vw, 2.4rem);
+  font-weight: 800;
+  font-stretch: 112%;
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+  max-width: 24ch;
 }
 
-.opening .btn-row { margin-top: 1.85rem; }
+/* Specification grid ---------------------------------------------------- */
 
-.opening__figure {
-  position: relative;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-  border: 1px solid var(--rule-on-deep);
-}
-.opening__figure img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  filter: saturate(0.72) contrast(1.06) brightness(0.86);
-}
-.opening__figure::after {
-  content: "";
-  position: absolute; inset: 0;
-  background: linear-gradient(200deg, transparent 40%, color-mix(in oklab, var(--bg-deep) 78%, transparent));
-  pointer-events: none;
-}
-
-/* Fact strip ------------------------------------------------------------ */
-
-.facts {
-  margin-top: clamp(2rem, 1.6rem + 1.6vw, 3rem);
-  border-top: 1px solid var(--rule-on-deep);
-  border-bottom: 1px solid var(--rule-on-deep);
+.spec {
+  margin: 0;
+  border-top: 1px solid var(--rule-strong);
+  border-bottom: 1px solid var(--rule-strong);
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(10.5rem, 1fr));
 }
-.facts > div {
-  padding: 1.35rem 0;
-  padding-right: 1.5rem;
+.spec > div {
+  padding: 1.1rem 1.25rem 1.15rem 0;
   border-right: 1px solid var(--rule-on-deep);
+  min-width: 0;
 }
-.facts > div:last-child { border-right: 0; }
-@media (max-width: 46rem) {
-  .facts > div { border-right: 0; border-bottom: 1px solid var(--rule-on-deep); padding-block: 1.05rem; }
-  .facts > div:last-child { border-bottom: 0; }
-}
-.facts dt {
+.spec > div:last-child { border-right: 0; padding-right: 0; }
+
+.spec dt {
   font-size: var(--step--1);
   font-weight: 600;
   color: var(--muted-on-deep);
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.35rem;
 }
-.facts dd {
+.spec dd {
   margin: 0;
-  font-size: var(--step-1);
-  font-weight: 800;
-  font-stretch: 112%;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-  text-wrap: balance;   /* keeps the four cells from looking ragged */
+  font-size: var(--step-0);
+  font-weight: 700;
+  line-height: 1.3;
+  text-wrap: pretty;
+}
+.spec dd em { font-style: normal; color: var(--copper-bright); }
+
+@media (max-width: 44rem) {
+  .spec { grid-template-columns: 1fr 1fr; }
+  .spec > div { padding: 0.9rem 1rem 0.95rem 0; border-bottom: 1px solid var(--rule-on-deep); }
+  .spec > div:nth-child(2n) { border-right: 0; padding-right: 0; }
+  .spec > div:nth-last-child(-n+1) { border-bottom: 0; }
+}
+@media (max-width: 26rem) {
+  .spec { grid-template-columns: 1fr; }
+  .spec > div { border-right: 0; padding-right: 0; }
+}
+
+/* Plate. A wide letterbox of real work, doing the job of establishing the
+   physical world without being a backdrop for text. */
+
+.plate {
+  margin-top: 0;
+  height: clamp(7rem, 3.2rem + 12vw, 12.5rem);
+  overflow: hidden;
+  border-top: 1px solid var(--rule-on-deep);
+  border-bottom: 1px solid var(--rule-on-deep);
+}
+.plate img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 42%;
+  filter: saturate(0.7) contrast(1.06) brightness(0.88);
 }
 
 /* ==========================================================================
@@ -522,7 +529,7 @@ a:hover { color: var(--ink-on-deep); }
 .door:hover .door__title, .door:focus-visible .door__title,
 .door:hover .door__note,  .door:focus-visible .door__note { transform: translateX(0.9rem); }
 .door__title {
-  font-size: var(--step-3);
+  font-size: clamp(1.35rem, 1.2rem + 0.75vw, 1.85rem);
   font-weight: 800;
   font-stretch: 118%;
   letter-spacing: -0.03em;
@@ -629,7 +636,7 @@ a:hover { color: var(--ink-on-deep); }
   width: 100%; height: 100%; object-fit: cover;
   filter: saturate(0.7) contrast(1.05) brightness(0.88);
 }
-.continuity h2 { font-size: var(--step-4); }
+.continuity h2 { font-size: var(--step-2); }
 .continuity p { margin-top: 1.25rem; color: var(--muted-on-deep); font-size: var(--step-1); line-height: 1.5; }
 
 /* ==========================================================================
@@ -637,17 +644,19 @@ a:hover { color: var(--ink-on-deep); }
    ========================================================================== */
 
 .page-head {
-  padding-block: clamp(2.25rem, 1.7rem + 2.4vw, 3.75rem)
-                 clamp(2.75rem, 2rem + 3.2vw, 4.75rem);
+  padding-block: clamp(1.75rem, 1.4rem + 1.6vw, 2.75rem)
+                 clamp(2rem, 1.6rem + 1.8vw, 3.25rem);
 }
 .page-head h1 {
-  font-size: var(--step-4);
-  font-weight: 900;
-  font-stretch: 120%;
-  letter-spacing: -0.035em;
+  font-size: clamp(1.55rem, 1.25rem + 1.5vw, 2.4rem);
+  font-weight: 800;
+  font-stretch: 112%;
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+  max-width: 26ch;
 }
-.page-head p { margin-top: 1.25rem; font-size: var(--step-1); color: var(--muted-on-deep); max-width: 54ch; line-height: 1.5; }
-.page-head .btn-row { margin-top: 2rem; }
+.page-head p { margin-top: 1rem; font-size: var(--step-1); color: var(--muted-on-deep); max-width: 56ch; line-height: 1.5; }
+.page-head .btn-row { margin-top: 1.6rem; }
 
 .crumb {
   font-size: var(--step--1);
@@ -718,7 +727,7 @@ a:hover { color: var(--ink-on-deep); }
 .contact-band { background: var(--bg-raised); border-top: 1px solid var(--rule-on-deep); }
 .contact-grid { display: grid; gap: clamp(2rem, 1.2rem + 2.6vw, 3.5rem); align-items: start; }
 @media (min-width: 58rem) { .contact-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
-.contact-grid h2 { font-size: var(--step-3); }
+.contact-grid h2 { font-size: var(--step-2); }
 .contact-grid > div > p { margin-top: 1rem; color: var(--muted-on-deep); max-width: 44ch; font-size: var(--step-1); line-height: 1.5; }
 
 .reach { list-style: none; margin: 0; padding: 0; }
