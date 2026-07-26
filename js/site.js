@@ -62,3 +62,42 @@
     remember(lang);
   });
 })();
+
+/* Mobile action dock.
+   Shown only when the page's own contact buttons are off screen, so the dock
+   never sits under a button the visitor can already tap. */
+
+(function () {
+  "use strict";
+
+  var dock = document.querySelector(".dock");
+  if (!dock) return;
+
+  // Every in-page way to reach us. If none is visible, the dock earns its place.
+  var anchors = document.querySelectorAll(
+    'main a[href^="https://wa.me"], main a[href^="tel:"], main a[href^="mailto:"]'
+  );
+  if (!anchors.length) return;
+
+  if (!("IntersectionObserver" in window)) {
+    dock.setAttribute("data-shown", "true");
+    return;
+  }
+
+  // Track which anchors are on screen. A counter breaks here: the observer's
+  // first callback reports every element at once, so misses drive it negative.
+  var onScreen = [];
+  var observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        var at = onScreen.indexOf(entry.target);
+        if (entry.isIntersecting && at === -1) onScreen.push(entry.target);
+        else if (!entry.isIntersecting && at !== -1) onScreen.splice(at, 1);
+      });
+      dock.setAttribute("data-shown", onScreen.length === 0 ? "true" : "false");
+    },
+    { rootMargin: "-8px 0px -8px 0px" }
+  );
+
+  for (var i = 0; i < anchors.length; i++) observer.observe(anchors[i]);
+})();

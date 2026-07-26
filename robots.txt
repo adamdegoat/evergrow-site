@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://adamdegoat.github.io/evergrow-site/sitemap.xml

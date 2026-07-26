@@ -404,6 +404,7 @@ a:hover { color: var(--ink-on-deep); }
   font-stretch: 112%;
   letter-spacing: -0.02em;
   line-height: 1.2;
+  text-wrap: balance;   /* keeps the four cells from looking ragged */
 }
 
 /* ==========================================================================
@@ -745,6 +746,57 @@ a:hover { color: var(--ink-on-deep); }
   color: var(--muted-on-deep);
   margin-top: 0.2rem;
   font-weight: 400;
+}
+
+/* ==========================================================================
+   Mobile action dock
+   Appears only once the opening CTAs have scrolled out of view, so it never
+   duplicates a button the visitor can already see.
+   ========================================================================== */
+
+.dock { display: none; }
+
+@media (max-width: 52rem) {
+  body { padding-bottom: 4.75rem; }   /* dock never covers the footer */
+
+  .dock {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: var(--z-sticky);
+    background: var(--rule-strong);
+    border-top: 1px solid var(--rule-strong);
+    padding-bottom: env(safe-area-inset-bottom, 0);
+    transform: translateY(101%);
+    visibility: hidden;
+    transition: transform 320ms var(--ease-out-expo), visibility 0s linear 320ms;
+  }
+  .dock[data-shown="true"] {
+    transform: none;
+    visibility: visible;
+    transition: transform 320ms var(--ease-out-expo), visibility 0s linear 0s;
+  }
+
+  .dock a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    min-height: 3.75rem;
+    font-weight: 700;
+    font-size: var(--step-0);
+    text-decoration: none;
+  }
+  .dock a:first-child { background: var(--copper); color: var(--on-copper); }
+  .dock a:last-child  { background: var(--bg-raised); color: var(--ink-on-deep); }
+  .dock a:active { filter: brightness(0.92); }
+  .dock svg { flex: none; }
+}
+
+@media (max-width: 52rem) and (prefers-reduced-motion: reduce) {
+  .dock { transition: none; }
 }
 
 /* ==========================================================================
