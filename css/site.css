@@ -243,7 +243,7 @@ a:hover { color: var(--ink-on-deep); }
 .nav a:hover { color: var(--ink-on-deep); border-bottom-color: var(--copper); }
 .nav a[aria-current="page"] { color: var(--ink-on-deep); border-bottom-color: var(--copper); }
 
-@media (max-width: 60rem) {
+@media (max-width: 72rem) {
   .masthead__inner { flex-wrap: wrap; padding-bottom: 0.5rem; }
   .nav {
     order: 3;
@@ -256,6 +256,11 @@ a:hover { color: var(--ink-on-deep); }
     mask-image: linear-gradient(to right, #000 calc(100% - 2.5rem), transparent);
   }
   .nav::-webkit-scrollbar { display: none; }
+}
+
+@media (max-width: 40rem) {
+  .nav { display: none; }
+  .masthead__inner { padding-bottom: 0; }
 }
 
 .lang {
@@ -552,6 +557,61 @@ a:hover { color: var(--ink-on-deep); }
   .door { grid-template-columns: 1fr; }
   .door__arrow { grid-row: auto; grid-column: 1; margin-top: 0.5rem; }
   .door:hover .door__arrow { transform: none; }
+}
+
+/* ==========================================================================
+   Who we work for
+   ========================================================================== */
+
+.who { list-style: none; margin: 0; padding: 0; counter-reset: who; }
+.who li {
+  display: grid;
+  gap: 0.5rem 3rem;
+  padding: clamp(1.4rem, 1.1rem + 1.2vw, 2.1rem) 0;
+  border-top: 1px solid var(--rule-on-deep);
+}
+.who li:last-child { border-bottom: 1px solid var(--rule-on-deep); }
+@media (min-width: 56rem) {
+  .who li { grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); align-items: start; }
+  .who h3 { grid-row: 1 / span 2; }
+}
+.who h3 {
+  font-size: clamp(1.3rem, 1.15rem + 0.7vw, 1.65rem);
+  line-height: 1.15;
+  text-wrap: balance;
+}
+.who p { color: var(--muted-on-deep); max-width: 62ch; }
+.who__send {
+  color: var(--copper-bright) !important;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Licensing
+   ========================================================================== */
+
+.licence-block > h2 { max-width: 20ch; }
+.licence-block > p {
+  margin-top: 1rem;
+  font-size: var(--step-1);
+  line-height: 1.5;
+  color: var(--muted-on-deep);
+  max-width: 62ch;
+}
+
+.chips {
+  list-style: none;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.chips li {
+  border: 1px solid var(--rule-strong);
+  padding: 0.5rem 0.85rem;
+  font-weight: 600;
+  font-size: var(--step--1);
 }
 
 /* ==========================================================================
