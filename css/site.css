@@ -200,6 +200,8 @@ a:hover { color: var(--ink-on-deep); }
   color: var(--ink-on-deep);
   margin-right: auto;
   flex: none;
+  min-height: 44px;   /* thumb target */
+  padding-block: 0.35rem;
 }
 .wordmark:hover { color: var(--ink-on-deep); }
 .wordmark__name {
@@ -229,7 +231,7 @@ a:hover { color: var(--ink-on-deep); }
   font-size: var(--step--1);
   font-weight: 600;
   white-space: nowrap;
-  padding-block: 0.4rem;
+  padding-block: 0.7rem;   /* keeps the tap target at 44px on a phone */
   border-bottom: 2px solid transparent;
   transition: color 160ms var(--ease-out-quart), border-color 160ms var(--ease-out-quart);
 }
@@ -264,7 +266,9 @@ a:hover { color: var(--ink-on-deep); }
   font: inherit;
   font-size: var(--step--1);
   font-weight: 700;
-  padding: 0.3rem 0.6rem;
+  min-height: 44px;      /* thumb target */
+  min-width: 44px;
+  padding: 0.3rem 0.7rem;
   cursor: pointer;
   transition: background 160ms var(--ease-out-quart), color 160ms var(--ease-out-quart);
 }
@@ -701,6 +705,7 @@ a:hover { color: var(--ink-on-deep); }
   padding-top: 1.25rem;
 }
 .band--deep .aside-note { border-top-color: var(--copper); }
+.aside-note h2,
 .aside-note h3 { font-size: var(--step-1); margin-bottom: 0.6rem; }
 .aside-note p { color: var(--muted-on-pale); }
 .band--deep .aside-note p { color: var(--muted-on-deep); }
@@ -753,8 +758,14 @@ a:hover { color: var(--ink-on-deep); }
   color: var(--muted-on-deep);
 }
 .foot__grid { display: flex; flex-wrap: wrap; gap: 1.5rem 3rem; align-items: baseline; }
-.foot nav { display: flex; flex-wrap: wrap; gap: 1.25rem; }
-.foot a { color: var(--muted-on-deep); text-decoration: none; }
+.foot nav { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; margin-block: -0.6rem; }
+.foot a {
+  color: var(--muted-on-deep);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;   /* thumb target */
+}
 .foot a:hover { color: var(--copper-bright); }
 .foot__legal { width: 100%; margin-top: 0.5rem; }
 
